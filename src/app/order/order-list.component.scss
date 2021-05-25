@@ -1,0 +1,44 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .search {
+    max-width: 400px;
+    padding-bottom: 40px;
+    margin: auto;
+  }
+  
+  .form-control {
+    margin-top: 10px;
+    box-shadow: 0 5px 50px 0 #B0C1D9;
+  }
+  
+  .form-control::placeholder {
+    font-family: FontAwesome;
+    color: grey;
+  }
+
+  .mid {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+  }
+
+  .vcenter {
+    display: flex;
+    align-items: center;
+  }
+
+  div.row {
+    border-top: solid 1px black;
+    border-bottom: solid 1px black;
+  }
+  
+  .middle {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 65px;
+  }

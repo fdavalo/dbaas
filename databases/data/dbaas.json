@@ -1,0 +1,91 @@
+{
+  "orders": [],
+  "users": [
+    {
+      "id": "admin@gmail.com",
+      "password": "d8794df55d64a6d0e3e99d117582180e",
+      "admin": true
+    },
+    {
+      "id": "franck@gmail.com",
+      "password": "b8f1f7cf8c9daa4d60b3a01da012ebee"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "56e7bb9d0c402809fc2ad1730b07a245",
+      "userId": "admin@gmail.com",
+      "expiration": 1621935563860
+    },
+    {
+      "id": "57db0d64c3c289abd1e6e26dc2deba64",
+      "userId": "admin@gmail.com",
+      "expiration": 1621935576179
+    },
+    {
+      "id": "0e1c22bc4f9358dc811a4c5dea516a11",
+      "userId": "franck@gmail.com",
+      "expiration": 1621936416948
+    },
+    {
+      "id": "5604276d14886b4b3482b4266871ac05",
+      "userId": "franck@gmail.com",
+      "expiration": 1621936976589
+    },
+    {
+      "id": "9e4c711c49580e407932b7b562ff53c1",
+      "userId": "franck@gmail.com",
+      "expiration": 1621936988749
+    },
+    {
+      "id": "c0676b2bd8f320bdb7531a80562bc333",
+      "userId": "franck@gmail.com",
+      "expiration": 1621947105897
+    },
+    {
+      "id": "1dd578f806a3cb71613f6ad09316863d",
+      "userId": "franck@gmail.com",
+      "expiration": 1621947163433
+    },
+    {
+      "id": "67a1a960efab0d6c34557c33a482c848",
+      "userId": "franck@gmail.com",
+      "expiration": 1621950702932
+    }
+  ],
+  "databases": [
+    {
+      "region": "LOCAL",
+      "service": "Bronze",
+      "name": "ms1",
+      "type": "mysql",
+      "namespace": "dbaas-franck-bronze",
+      "id": 1621946941642,
+      "snapshots": [],
+      "status": "Running",
+      "userId": "franck@gmail.com",
+      "urlDb": "ms1-mysql-dbaas-franck-bronze.apps.ocp4-199.cluster:31150",
+      "urlAdmin": "ms1-mysql-admin-dbaas-franck-bronze.apps.ocp4-199.cluster"
+    },
+    {
+      "region": "LOCAL",
+      "service": "Argent",
+      "name": "pg1",
+      "type": "postgres",
+      "namespace": "dbaas-franck-argent",
+      "id": 1621947394891,
+      "snapshots": [
+        {
+          "id": "1621947681000",
+          "ready": "true",
+          "freq": "hourly",
+          "size": "1Gi"
+        }
+      ],
+      "status": "Running",
+      "userId": "franck@gmail.com",
+      "urlDb": "pg1-postgres-dbaas-franck-argent.apps.ocp4-199.cluster:30326",
+      "urlAdmin": "pg1-postgres-admin-dbaas-franck-argent.apps.ocp4-199.cluster"
+    }
+  ]
+}

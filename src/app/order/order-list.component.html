@@ -1,0 +1,124 @@
+<div class="container">
+<div class="mt-5">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col">Created on</div>
+        <div class="col" style="color: black">
+            <b>Service</b>
+        </div>
+        <div class="col" style="color: black">
+            <b>Name</b>
+        </div>
+        <div class="col" style="color: black">
+            <b>DB Type</b>
+        </div>
+        <div class="col" style="color: black">
+            <b>DB Status</b>
+        </div>
+    </div>
+    <div class="row" *ngFor="let db of orders" (click)="showDb(db)" [appHighlight]>
+        <div class="col"></div>
+        <div class="col">{{ orderDate(db) }}</div>
+        <div class="col" style="color: black">
+            <b>{{ db.service }}</b>
+        </div>
+        <div class="col" style="color: black">
+            <b>{{ db.name }}</b>
+        </div>
+        <div class="col" style="color: black">
+            <b>{{ db.type }}</b>
+        </div>
+        <div class="col" style="color: black">
+            <b>{{ db.status }}</b>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col"> Refreshed on</div>
+        <div class="col" style="color: black">
+        </div>
+        <div class="col" style="color: black">
+        </div>
+        <div class="col" style="color: black">
+        </div>
+        <div class="col" style="color: black">
+        </div>
+    </div>
+    <div class="row" (click)="Refresh()" [appHighlight]>
+        <div class="col"><button class="btn" type="submit"><i class="fa fa-refresh"></i></button></div>
+        <div class="col"> {{ refreshed }}</div>
+        <div class="col" style="color: black">
+        </div>
+        <div class="col" style="color: black">
+        </div>
+        <div class="col" style="color: black">
+        </div>
+        <div class="col" style="color: black">
+        </div>
+    </div>
+</div>
+  
+<div class="mt-5">
+    <div class="row justify-content-center">
+            <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
+                <div class="cart">     
+                    <h4>Create a new Database</h4>
+                    <div class="row">
+                        <div class="col">
+                            <label for="type"><i class="fa"></i> Type </label>
+                        </div>
+                        <div class="col-6">
+                            <select id="type" formControlName="type" [(ngModel)]="type">
+                                <option *ngFor="let item of types()" value="{{ item }}">{{ item }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="region"><i class="fa"></i> Region </label>
+                        </div>
+                        <div class="col-6">
+                            <select id="region" formControlName="region">
+                                <option *ngFor="let item of listRegions()" value="{{ item }}">{{ regionTitle(item) }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="service"><i class="fa"></i> Service </label>
+                        </div>
+                        <div class="col-6">
+                            <select id="service" formControlName="service">
+                                <option *ngFor="let item of listServices()" value="{{ item }}">{{ serviceTitle(item) }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="name"><i class="fa"></i> Name</label>
+                        </div>
+                        <div class="col-6">
+                            <input type="text" id="name" formControlName="name" [(ngModel)]="name">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="password"><i class="fa"></i> Admin Password</label>
+                        </div>
+                        <div class="col-6">
+                            <input type="password" id="password" formControlName="password" [(ngModel)]="password">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button class="btn" type="submit"
+                                [disabled]="checkoutForm.invalid">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>  
+            </form>
+    </div>
+</div>
+</div>

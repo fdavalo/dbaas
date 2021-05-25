@@ -1,0 +1,92 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ${app}-${type}-pvc
+  labels:
+    app: ${app}-${type}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: ${sc}
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${app}-${type}
+  labels:
+    app: ${app}-${type}
+spec:
+  selector:
+    matchLabels:
+      app: ${app}-${type}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: ${app}-${type}
+    spec:
+      containers:
+      - image: mysql:5.6
+        name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: ${app}-${type}-pass
+              key: password
+        ports:
+        - containerPort: 3306
+          name: mysql
+        volumeMounts:
+        - name: ${type}-data 
+          mountPath: /var/lib/mysql
+      - resources: {}
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 30
+          timeoutSeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 6
+        name: phpmyadmin
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 30
+          timeoutSeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 6
+        env:
+          - name: DATABASE_PORT_NUMBER
+            value: '3306'
+          - name: DATABASE_HOST
+            value: 127.0.0.1 
+          - name: PHPMYADMIN_ALLOW_NO_PASSWORD
+            value: 'true'
+          - name: PHPMYADMIN_ALLOW_ARBITRARY_SERVER
+            value: 'true'
+          - name: DATABASE_ENABLE_SSL
+            value: 'no'
+        ports:
+          - name: http
+            containerPort: 8080
+            protocol: TCP
+          - name: https
+            containerPort: 8443
+            protocol: TCP
+        imagePullPolicy: IfNotPresent
+        image: 'docker.io/bitnami/phpmyadmin:5.1.0-debian-10-r28'
+      volumes:
+      - name: ${type}-data 
+        persistentVolumeClaim:
+          claimName: ${app}-${type}-pvc

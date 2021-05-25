@@ -1,0 +1,12 @@
+spec:
+  template:
+    spec:
+      volumes:
+      - name: ${type}-data 
+        persistentVolumeClaim:
+          claimName: ${app}-${type}-pvc-${id}
+      - name: pgadmin-data
+        emptyDir: {}
+      - name: pgadmin-data-logs
+        emptyDir: {}
+

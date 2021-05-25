@@ -1,0 +1,7 @@
+spec:
+  template:
+    spec:
+      volumes:
+      - name: ${type}-data 
+        persistentVolumeClaim:
+          claimName: ${app}-${type}-pvc-${id}

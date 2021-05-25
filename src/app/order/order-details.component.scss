@@ -1,0 +1,55 @@
+.title-description {
+    font-size: 13px;
+  }
+  
+  .middle {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 65px;
+  }
+  
+  .img-fluid {
+    max-height: 450px;
+    display: block;
+    margin: auto;
+  }
+  
+  ul {
+    font-size: 13px;
+    list-style-position: outside;
+  
+    li {
+      margin-left: -24px !important;
+    }
+  }
+  
+  .gold {
+    background-color: palegoldenrod;
+  }
+  
+  .darkslategrey {
+    background-color: darkslategrey;
+  }
+  
+  .grey {
+    background-color: grey;
+  }
+  
+  .silver {
+    background-color: silver;
+  }
+  
+  .horbar {
+    border-top: solid 1px black;
+    border-bottom: solid 1px black;  
+  }
+
+  .product:hover {
+    background-color: grey;
+  }
+
+  div.row {
+    border-top: solid 1px black;
+    border-bottom: solid 1px black;
+  }

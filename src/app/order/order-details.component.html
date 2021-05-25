@@ -1,0 +1,101 @@
+<div class="container">
+  <div class="col-9 mt-5">
+      <div class="row">
+        <div class="col-3"> <b>Database</b></div>
+        <div class="col-8"> {{ db.name }}</div>
+      </div>
+      <div class="row">
+        <div class="col-3"> <b>Region</b> </div>
+        <div class="col-8"> {{ regionTitle(db.region) }}</div>
+      </div>
+      <div class="row">
+        <div class="col-3"> <b>Service</b> </div>
+        <div class="col-8"> {{ serviceTitle(db.service) }}</div>
+      </div>
+      <div class="row">
+        <div class="col-3"> <b>Created on</b> </div>
+        <div class="col-8"> {{ orderDate(db.id) }}</div>
+      </div>
+      <div class="row">
+        <div class="col-3"> <b>Refreshed on</b> </div>
+        <div class="col-8"> {{ db.refreshed }}</div>
+      </div>
+      <div class="row" *ngIf="recovered(db)">
+        <div class="col-3"> <b>Recovered from</b> </div>
+        <div class="col-8"> {{ orderDate(db.recovered) }}</div>
+      </div>
+      <div class="row">
+        <div class="col-3"> <b>Type</b> </div>
+        <div class="col-8"> {{ db.type }}</div>
+      </div>
+      <div class="row">
+        <div class="col-3"> <b>Status</b> </div>
+        <div class="col-8"> {{ db.status }}</div>
+      </div>
+      <div class="row">
+        <div class="col-3"> <b>DB Url</b> </div>
+        <div class="col-8"> {{ db.urlDb }}</div>
+      </div>
+      <div class="row">
+        <div class="col-3"> <b>Admin Url</b> </div>
+        <div class="col-8"> <a href="{{ showUrl(db.urlAdmin) }}">{{ showUrl(db.urlAdmin) }}</a></div>
+      </div>
+      <div class="row">
+        <div class="col-3"> <b>Admin Login</b> </div>
+        <div class="col-8"> {{ db.loginAdmin }}</div>
+      </div>
+      <div class="row">
+        <div class="col-3"> <b>Delete</b> </div>
+        <div class="col-8"><button class="btn" (click)="onDelete()"><i class="fa fa-trash"></i></button></div>      
+      </div>
+      <div class="row">
+        <div class="col-3"> <b>Take a snapshot</b> </div>
+        <div class="col-8"><button class="btn" (click)="onSnapshot()"><i class="fa fa-clone" aria-hidden="true"></i></button></div>      
+      </div>
+      <div class="row">
+        <div class="col-3"> <b>Refresh data</b> </div>
+        <div class="col-8"><button class="btn" (click)="onRefresh()"><i class="fa fa-refresh" aria-hidden="true"></i></button></div>      
+      </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="col-13 mt-5">
+        <div class="row">
+            <div class="col-3" style="color: black"><b>Snapshot</b></div>
+            <div class="col-2" style="color: black">
+                <b>Ready</b>
+            </div>
+            <div class="col-2" style="color: black">
+                <b>Frequency</b>
+            </div>
+            <div class="col-2" style="color: black">
+                <b>Size</b>
+            </div>
+            <div class="col-1" style="color: black">
+                <b>Delete</b>
+            </div>
+            <div class="col-1" style="color: black">
+                <b>Recover</b>
+            </div>
+        </div>
+        <div class="row" *ngFor="let snapshot of db.snapshots" [appHighlight]>
+            <div class="col-3" style="color: black">{{ orderDate(snapshot.id) }}</div>
+            <div class="col-2" style="color: black">
+                <b>{{ snapshot.ready }}</b>
+            </div>
+            <div class="col-2" style="color: black">
+              <b>{{ snapshot.freq }}</b>
+            </div>
+            <div class="col-2" style="color: black">
+                <b>{{ snapshot.size }}</b>
+            </div>
+            <div class="col-1" style="color: black">
+              <button class="btn" (click)="deleteSnapshot(db, snapshot)"><i class="fa fa-trash"></i></button>
+            </div>
+            <div class="col-1" style="color: black">
+              <button class="btn" [hidden]="! ready(snapshot)" (click)="recoverDb(db, snapshot)"><i class="fa fa-medkit"></i></button>
+            </div>
+        </div>
+    </div>

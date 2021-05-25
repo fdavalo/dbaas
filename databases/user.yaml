@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ${app}-${type}-pass
+type: Opaque
+data:
+  password: ${password} 

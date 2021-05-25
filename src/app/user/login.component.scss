@@ -1,0 +1,74 @@
+.icon-container {
+    padding: 8px 0;
+    font-size: 30px;
+  
+    .fa-cc-visa {
+      color: navy;
+    }
+  
+    .fa-cc-amex {
+      color: blue;
+    }
+  
+    .fa-cc-mastercard {
+      color: red;
+    }
+  
+    .fa-cc-discover {
+      color: orange;
+    }
+  }
+  
+  input[type=text] {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 10px;
+  }
+  
+  p {
+    margin-bottom: 10px;
+  }
+  
+  .cart {
+    .emptyCart {
+      font-size: 14px;
+  
+      p {
+        text-align: center;
+      }
+    }
+  
+    .cartProduct {
+      margin-top: 30px;
+  
+      i {
+        font-size: 18px;
+      }
+    }
+  }
+  
+  label, input {
+    font-size: 14px;
+  }
+  
+  .validator, .text-danger {
+    font-size: 12px;
+  }
+
+  .col-sm-12 {
+    margin-top: 5px;
+  }
+  
+  .text-size {
+    font-size: 12px;
+  }
+
+  .material-icons {
+    display: inline-flex;
+    vertical-align: middle;
+    font-size: 16px;
+ }
+  

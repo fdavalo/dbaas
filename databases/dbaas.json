@@ -1,0 +1,14 @@
+{
+  "orders": [],
+  "users": [
+    {
+      "id": "admin@gmail.com",
+      "password": "d8794df55d64a6d0e3e99d117582180e",
+      "admin": true
+    }
+  ],
+  "sessions": [
+  ],
+  "databases": [
+  ]
+}

@@ -1,0 +1,90 @@
+<div class="mt-5">
+    <div class="row justify-content-center">
+        <div class="col col-3">
+            <!--Login section-->
+            <form [formGroup]="loginForm" (ngSubmit)="onSignIn(loginForm.value)">
+                    <h4>Sign In</h4>
+                    <label for="email"><i class="fa fa-user"></i> Email</label>
+                    <div class="row col-md-auto">
+                        <input type="email" id="email" maxlength="20" size="20" formControlName="email" class="form-control" [ngClass]="loginForm.controls['email'].invalid ? 'is-invalid' : ''">
+                        <label class="text-danger" *ngIf="loginForm.controls['email'].hasError('email')">Enter a valid email address!</label>
+                    </div>
+                    <label for="password"><i class="fa fa-password"></i> Password</label>
+                    <div class="row col-md-auto">
+                        <input type="password" id="password" maxlength=15 size="15" formControlName="password" class="form-control">
+                    </div>
+                    <br/>
+                <button class="btn btn-success" type="submit"
+                    [disabled]="loginForm.invalid">
+                    Sign In
+                </button>
+            </form>
+        </div>
+        <div class="col col-3">
+                <form [formGroup]="registerForm" (ngSubmit)="onRegister(registerForm.value)">
+                <!--Register section-->
+                    <h4>Register</h4>
+                    <label for="email"><i class="fa fa-user"></i> Email</label>
+                    <div class="row col-md-auto">
+                        <input type="email" id="emailr" maxlength="20" size="20" formControlName="email" class="form-control" [ngClass]="registerForm.controls['email'].invalid ? 'is-invalid' : ''">
+                        <label class="text-danger" *ngIf="registerForm.controls['email'].hasError('email')">Enter a valid email address!</label>
+                    </div>
+                    <label for="password"><i class="fa fa-password"></i> Password</label>
+                    <div class="row col-md-auto">
+                        <input type="password" id="passwordr" maxlength="15" size="15" formControlName="password" class="form-control">
+                    </div>
+                        <label class="row col-md-auto validator" [ngClass]="registerForm.controls['password'].hasError('required') || registerForm.controls['password'].hasError('minlength')  ? 'text-danger' : 'text-success'">
+                            <i class="material-icons">
+                            {{ registerForm.controls['password'].hasError('required') ||
+                            registerForm.controls['password'].hasError('minlength') ? 'cancel' :
+                            'check_circle' }}
+                            </i>
+                            Must be at least 8 characters!
+                        </label>
+                        <label class="row col-md-auto validator" [ngClass]="registerForm.controls['password'].hasError('required') || registerForm.controls['password'].hasError('hasNumber')  ? 'text-danger' : 'text-success'">
+                            <i class="material-icons">
+                            {{ registerForm.controls['password'].hasError('required') ||
+                            registerForm.controls['password'].hasError('hasNumber') ? 'cancel' :
+                            'check_circle' }}
+                            </i>
+                            Must contain at least 1 number!
+                        </label>
+                        <label class="row col-md-auto validator" [ngClass]="registerForm.controls['password'].hasError('required') || registerForm.controls['password'].hasError('hasCapitalCase')  ? 'text-danger' : 'text-success'">
+                            <i class="material-icons">
+                            {{ registerForm.controls['password'].hasError('required') ||
+                            registerForm.controls['password'].hasError('hasCapitalCase') ? 'cancel' :
+                            'check_circle' }}
+                            </i>
+                            Must contain at least 1 in Capital Case!
+                        </label>
+                        <label class="row col-md-auto validator" [ngClass]="registerForm.controls['password'].hasError('required') || registerForm.controls['password'].hasError('hasSmallCase')  ? 'text-danger' : 'text-success'">
+                            <i class="material-icons">
+                            {{ registerForm.controls['password'].hasError('required') ||
+                            registerForm.controls['password'].hasError('hasSmallCase') ? 'cancel' :
+                            'check_circle' }}
+                            </i>
+                            Must contain at least 1 Letter in Small Case!
+                        </label>
+                        <label class="row col-md-auto validator" [ngClass]="registerForm.controls['password'].hasError('required') || registerForm.controls['password'].hasError('hasSpecialCharacters') ? 'text-danger' : 'text-success'">
+                            <i class="material-icons">
+                            {{ registerForm.controls['password'].hasError('required') ||
+                            registerForm.controls['password'].hasError('hasSpecialCharacters') ? 'cancel' :
+                            'check_circle' }}
+                            </i>
+                            Must contain at least 1 Special Character!
+                        </label>              
+                    <label for="confirmPassword"><i class="fa fa-password"></i> Confirm Password</label>
+                    <div class="row col-md-auto">
+                        <input type="password" id="confirmPassword" maxlength="15" size="15" formControlName="confirmPassword" class="form-control">
+                        <label class="text-danger" *ngIf="registerForm.controls['confirmPassword'].hasError('NoPassswordMatch')">Password do not match</label>
+                    </div>
+                    <br/>
+                <button class="btn btn-success" type="submit"
+                    [disabled]="registerForm.invalid">
+                    Register
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+  

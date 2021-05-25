@@ -1,0 +1,52 @@
+<div class="mt-5">
+    <div class="row justify-content-center">
+      <div class="col col-4">
+      <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
+          <!--Billing section-->
+          <div class="cart">
+     
+            <h4>User Profile</h4>
+            <label for="fullName"><i class="fa fa-user"></i> Full Name</label>
+            <div>
+              <input type="text" id="fullName" formControlName="fullName" [(ngModel)]="fullName">
+            </div>
+            <div formGroupName="address">
+              <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+              <div>
+                <input type="text" id="adr" name="street" formControlName="street" [(ngModel)]="address.street">
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <label for="city"><i class="fa fa-building"></i> City</label>
+                  <div>
+                    <input type="text" id="city" name="city" formControlName="city" [(ngModel)]="address.city">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <label for="country"><i class="fa fa-globe"></i> Country</label>
+                  <div>
+                    <input type="text" id="country" name="country" formControlName="country" [(ngModel)]="address.country">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <label for="state"><i class="fa fa-institution"></i> County</label>
+                  <input type="text" id="state" name="state" formControlName="county" [(ngModel)]="address.county">
+                </div>
+                <div class="col-sm-6">
+                  <label for="postcode"><i class="fa fa-location-arrow"></i> Post Code</label>
+                  <input type="text" id="postcode" name="postalcode" formControlName="postalCode" [(ngModel)]="address.postalCode"> 
+                </div>
+              </div>
+            </div>
+          </div>
+            <button class="btn btn-success" type="submit"
+                [disabled]="checkoutForm.invalid">
+                Update
+            </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

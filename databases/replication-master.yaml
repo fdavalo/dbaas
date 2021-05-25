@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: backup-s3
+spec:
+  template:
+    spec:
+      containers:
+      - name: kubectl-aws
+        image: expert360/kubectl-awscli:v1.11.2
+        env:
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: aws-s3-key
+              key: aws-access-key-id
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: aws-s3-access-key
+              key: aws-secret-access-key
+        command: [ "/bin/bash", "-c", "aws s3 sync s3://my-bucket/ /data/backup" ]
+        volumeMounts:
+            - name: backup-aws
+              mountPath: /data/backup
+      volumes:
+        - name: backup-aws
+          persistentVolumeClaim:
+            claimName: backup-aws-claim
+      restartPolicy: Never

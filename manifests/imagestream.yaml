@@ -1,0 +1,23 @@
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  name: dbaas 
+spec:
+  lookupPolicy:
+    local: false
+---
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  name: nodejs-14 
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+    - name: latest
+      annotations:
+        openshift.io/imported-from: registry.access.redhat.com/ubi8/nodejs-14
+      from:
+        kind: DockerImage
+        name: registry.access.redhat.com/ubi8/nodejs-14
+---

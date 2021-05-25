@@ -1,0 +1,15 @@
+<nav class="navbar navbar-expand-lg navbar" [ngStyle]="{'background': backgroundColor}">    
+  <div class="container-fluid">
+      <a routerLink="/" class="navbar-brand myStore">Mes Bases de données</a>
+      <div class="justify-content-end">
+        <a routerLink="{{link}}" class="navbar-brand" title="{{ title }}">
+          <sup>{{ title }} </sup><i class="fa fa-user"></i><sup> {{ user }}</sup>
+        </a>
+        &nbsp;
+        <a routerLink="/profile" class="navbar-brand" title="Profile" *ngIf="link == '/logout'">
+          <i class="fa fa-id-card"></i>
+        </a>  
+      </div>
+  </div>
+</nav>
+  
