@@ -7,8 +7,17 @@ const path = require('path');
 const { exec } = require("child_process");
 const process = require('process');
 
+function addEnv(cmd, region, type) {
+  var str = "export TYPE="+type;
+  if (getKubeConfig(region) == null) str = str + ";export KUBECONFIG=";
+  else str = str + ";export KUBECONFIG="+getKubeConfig(region);
+  str = str + ";export SC="+getStorageClass(region);
+  str = str + ";export VSC="+getSnapClass(region);
+  return str+"; cd databases; "+cmd;
+}
+
 function deleteDatabase(body) {
-  cmd = "export KUBECONFIG="+getKubeConfig(body.region)+";export TYPE="+body.type+";cd databases; /bin/sh delete.sh " + body.namespace + " " + body.name + " " + body.password;
+  cmd = addEnv("/bin/sh delete.sh " + body.namespace + " " + body.name + " " + body.password, body.region, body.type);
   exec(cmd, (error, stdout, stderr) => {
     if (error) {
         console.log(`error: ${error.message}`);
@@ -23,7 +32,7 @@ function deleteDatabase(body) {
 }
 
 function createDatabase(body) {
-  cmd = "export KUBECONFIG="+getKubeConfig(body.region)+";export SC="+getStorageClass(body.region)+";export VSC="+getSnapClass(body.region)+";export TYPE="+body.type+";cd databases; /bin/sh create.sh " + body.namespace + " " + body.name + " " + body.password + " " + body.service;
+  cmd = addEnv("/bin/sh create.sh " + body.namespace + " " + body.name + " " + body.password + " " + body.service, body.region, body.type);
   exec(cmd, (error, stdout, stderr) => {
     if (error) {
         console.log(`error: ${error.message}`);
@@ -38,7 +47,7 @@ function createDatabase(body) {
 }
 
 function checkDatabase(body) {
-  cmd = "export KUBECONFIG="+getKubeConfig(body.region)+";export TYPE="+body.type+";cd databases; /bin/sh check.sh "+ body.namespace + " " + body.name;
+  cmd = addEnv("/bin/sh check.sh "+ body.namespace + " " + body.name, body.region, body.type);
   exec(cmd, (error, stdout, stderr) => {
     if (error) {
         console.log(`error: ${error.message}`);
@@ -97,7 +106,7 @@ function getSnapshot(db, id) {
 
 function addSnapshot(body) {
   var id = (new Date).getTime();
-  cmd = "export KUBECONFIG="+getKubeConfig(body.region)+";export SC="+getStorageClass(body.region)+";export VSC="+getSnapClass(body.region)+";export TYPE="+body.type+";cd databases; /bin/sh snapshot.sh "+ body.namespace + " " + body.name + " " + id;
+  cmd = addEnv("/bin/sh snapshot.sh "+ body.namespace + " " + body.name + " " + id, body.region, body.type);
   exec(cmd, (error, stdout, stderr) => {
     if (error) {
         console.log(`error: ${error.message}`);
@@ -117,7 +126,7 @@ function addSnapshot(body) {
 }
 
 function deleteSnapshot(body, id) {
-  cmd = "export KUBECONFIG="+getKubeConfig(body.region)+";export TYPE="+body.type+";cd databases; /bin/sh deletesnapshot.sh "+ body.namespace + " " + body.name + " " + id;
+  cmd = addEnv("/bin/sh deletesnapshot.sh "+ body.namespace + " " + body.name + " " + id, body.region, body.type);
   exec(cmd, (error, stdout, stderr) => {
     if (error) {
         console.log(`error: ${error.message}`);
@@ -140,7 +149,7 @@ function deleteSnapshot(body, id) {
 }
 
 function recoverSnapshot(body, id) {
-  cmd = "export KUBECONFIG="+getKubeConfig(body.region)+";export SC="+getStorageClass(body.region)+";export VSC="+getSnapClass(body.region)+";export TYPE="+body.type+";cd databases; /bin/sh recoversnapshot.sh "+ body.namespace + " " + body.name + " " + id;
+  cmd = addEnv("/bin/sh recoversnapshot.sh "+ body.namespace + " " + body.name + " " + id, body.region, body.type);
   exec(cmd, (error, stdout, stderr) => {
     if (error) {
         console.log(`error: ${error.message}`);
@@ -312,7 +321,7 @@ server.use((req, res, next) => {
     for (var key in process.env) {
       if (key.startsWith('REGIONS_') && (! key.endsWith('_KUBECONFIG'))) {
         var region = key.substring(8);
-        if (getKubeConfig(region) != null) regions[region] = {"title":process.env[key]};
+        regions[region] = {"title":process.env[key]};
       }
     }
     console.log("regions",regions);

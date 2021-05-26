@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dbaas-1-0-1 
+spec:
+  selector:
+    app: dbaas-1-0-1 
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080 
+      name: http
+

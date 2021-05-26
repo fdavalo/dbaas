@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dbaas 
+data:
+  start.sh: |
+    export OC_DIR=/opt/app-root/src/databases/data
+    if [[ ! -f $OC_DIR/oc ]]; then
+        curl http://downloads.openshift-console.svc/amd64/linux/oc.tar -o $OC_DIR/oc.tar
+        cd $OC_DIR 
+        tar xvf oc.tar
+        chmod +x oc
+        /bin/rm -f oc.tar
+    fi
+    if [[ ! -f $OC_DIR/dbaas.json ]]; then
+        cp $OC_DIR/../dbaas.json $OC_DIR/dbaas.json
+    fi
+    export PATH=$PATH:/opt/app-root/src/databases/data
+    cd /opt/app-root/src
+    npm run start 

@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dbaas-1-0-1 
+  labels:
+    app: dbaas-1-0-1 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dbaas-1-0-1 
+  template:
+    metadata:
+      labels:
+        app: dbaas-1-0-1 
+    spec:
+      serviceAccountName: dbaas 
+      containers:
+      - name: web 
+        image: quay.io/fdavalo/utils:dbaas-1.0.1 
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        args: ['/bin/sh', '/run/shared/start.sh']
+        volumeMounts:
+        - name: shared
+          mountPath: '/opt/app-root/src/databases/data'
+        - name: config-volume
+          mountPath: '/run/shared'
+      volumes:
+      - name: shared
+        emptyDir: {}
+      - name: config-volume
+        configMap:
+          name: dbaas 
+

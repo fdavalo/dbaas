@@ -7,7 +7,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 Add env variables for each region/cluster to host databases : 
 
     `REGIONS_{region uppercase}={region title}`
-    `REGIONS_{region uppercase}_KUBECONFIG={kubeconfig file path}`
+    `REGIONS_{region uppercase}_KUBECONFIG={kubeconfig file path}`  --> do not specify KUBECONFIG if using serviceaccount in pod
     `REGIONS_{region uppercase}_SC={storage class}`
     `REGIONS_{region uppercase}_VSC={volume snapshot class}`
 
