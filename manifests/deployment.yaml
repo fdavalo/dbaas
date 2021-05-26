@@ -17,11 +17,18 @@ spec:
       serviceAccountName: dbaas 
       containers:
       - name: web 
-        image: quay.io/fdavalo/utils:dbaas-1.0.1 
+        image: image-registry.openshift-image-registry.svc:5000/dbaas:dbaas-1.0.1 
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
         args: ['/bin/sh', '/run/shared/start.sh']
+        env:
+          - name: REGIONS_LOCAL 
+            value: "local cluster"
+          - name: REGIONS_LOCAL_SC
+            value: ocs-external-storagecluster-ceph-rbd
+          - name: REGIONS_LOCAL_VSC
+            value: ocs-external-storagecluster-rbdplugin-snapclass
         volumeMounts:
         - name: shared
           mountPath: '/opt/app-root/src/databases/data'

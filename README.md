@@ -22,15 +22,19 @@ Then run `npm run start` for a prod server. Navigate to `http://localhost:8080/
 
 ## Deploy
 
-`oc new-app nodejs-14~https://github.com/fdavalo/shop-app-angular.git  --name=shop-app-angular`
-or
-`oc new-app quay.io/app-sre/ubi8-nodejs-10~https://github.com/fdavalo/shop-app-angular.git --name=shop-app-angular`
-
-`oc expose service/shop-app-angular`
+`oc new-project dbaas`
+then
+`oc apply -f manifests/[imagestream.yaml, buildconfig.yaml]`
+then
+`oc start-build dbaas-1-0-1 --wait=true --follow=true`
+then
+`oc apply -f manifests/[serviceaccount.yaml, clusterrolebinding.yaml, configmap.yaml, deployment.yaml, service.yaml]`
+then
+`oc expose service/dbaas-1-0-1`
 
 Then get your url from `oc get routes`
 
-## Backend servers (products, users, orders)
+## Backend servers (databases, users, sessions)
 
 By default, the backend servers will be served by a json-server.
 
@@ -41,3 +45,5 @@ Existing admin user is :
 admin@gmail.com:admin
 
 Users can register and ready to create databases.
+
+For persistence of data, change in deployment.yaml from emptydir to a PVC
