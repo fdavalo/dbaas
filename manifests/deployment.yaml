@@ -17,7 +17,7 @@ spec:
       serviceAccountName: dbaas 
       containers:
       - name: web 
-        image: image-registry.openshift-image-registry.svc:5000/dbaas:dbaas-1.0.1 
+        image: image-registry.openshift-image-registry.svc:5000/dbaas/dbaas:1.0.1 
         imagePullPolicy: Always
         ports:
         - containerPort: 8080

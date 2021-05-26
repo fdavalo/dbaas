@@ -319,7 +319,7 @@ server.use((req, res, next) => {
   if (req.path == '/regions') {
     var regions = {};
     for (var key in process.env) {
-      if (key.startsWith('REGIONS_') && (! key.endsWith('_KUBECONFIG'))) {
+      if (key.startsWith('REGIONS_') && (! key.endsWith('_KUBECONFIG')) && (! key.endsWith('_SC')) && (! key.endsWith('_VSC'))) {
         var region = key.substring(8);
         regions[region] = {"title":process.env[key]};
       }

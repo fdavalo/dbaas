@@ -34,6 +34,8 @@ then
 
 Then get your url from `oc get routes`
 
+If you do not want to build the image, you can use this image `quay.io/fdavalo/utils:dbaas-1.0.1` and change it in deployment.yaml
+
 ## Backend servers (databases, users, sessions)
 
 By default, the backend servers will be served by a json-server.
